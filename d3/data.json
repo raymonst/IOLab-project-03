@@ -1,0 +1,26 @@
+{
+	"properties":["count","sentiment","time"],
+	"shows":["thesimpsons","familyguy"],
+	"values":[
+		{"count":10,"sentiment":6.5,"time":1,"shows":"thesimpsons"},
+		{"count":53,"sentiment":7.2,"time":2,"shows":"thesimpsons"},
+		{"count":105,"sentiment":7.5,"time":3,"shows":"thesimpsons"},
+		{"count":86,"sentiment":2.3,"time":4,"shows":"thesimpsons"},
+		{"count":56,"sentiment":7.4,"time":5,"shows":"thesimpsons"},
+		{"count":32,"sentiment":5.3,"time":6,"shows":"thesimpsons"},
+		{"count":76,"sentiment":4.4,"time":1,"shows":"familyguy"},
+		{"count":43,"sentiment":6.2,"time":2,"shows":"familyguy"},
+		{"count":29,"sentiment":3.9,"time":3,"shows":"familyguy"},
+		{"count":17,"sentiment":5.6,"time":4,"shows":"familyguy"},
+		{"count":9,"sentiment":5.1,"time":1,"shows":"bobsburger"},
+		{"count":23,"sentiment":7.2,"time":2,"shows":"bobsburger"},
+		{"count":12,"sentiment":6.7,"time":3,"shows":"bobsburger"},
+		{"count":58,"sentiment":8.2,"time":4,"shows":"bobsburger"},
+		{"count":24,"sentiment":7.4,"time":5,"shows":"bobsburger"},
+		{"count":12,"sentiment":4.2,"time":6,"shows":"bobsburger"},
+		{"count":48,"sentiment":5.4,"time":7,"shows":"bobsburger"},
+		{"count":25,"sentiment":7.6,"time":8,"shows":"bobsburger"},
+		{"count":10,"sentiment":8.9,"time":9,"shows":"bobsburger"}
+	]
+
+}

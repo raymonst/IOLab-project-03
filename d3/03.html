@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>D3 Test</title>
+	<script type="text/javascript" src="../_js/d3.v2.js"></script>
+	<script type="text/javascript" src="../_js/jquery-1.8.1.min.js"></script>
+	<style>
+		.axis path,
+		.axis line {
+		    fill: none;
+		    stroke: black;
+		    shape-rendering: crispEdges;
+		}
+		.axis text {
+			font-size: 10px;
+		}
+		svg circle {
+			opacity: .3;
+		}
+		svg circle:hover {
+			opacity: .5;
+		}
+		svg .familyguy {
+			fill: #ff0000;
+		}
+		svg .thesimpsons {
+			fill: blue;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+	
+		d3.json("data.json", function(data) {
+
+			// initial variables
+			var w = 500;
+			var h = 500;
+			var svg = d3.select("#chart").append("svg").attr("width",w).attr("height",h);
+			var padding = 30;
+
+			var xScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[0]; })]).range([padding, w - padding*2]).nice();
+			var yScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([h - padding, padding]).nice();
+			var rScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([1, 20]).nice();
+			var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5);
+			
+			
+			
+			
+/*
+			var x = {}, y = {};
+  			data.shows.forEach(function(show) {
+  				var value = function(d) { return d[show]; };
+  			    var	domain = [0, d3.max(data.values, value)];
+  			    var	range = [padding / 2, 100 - padding / 2];
+  			    x[show] = d3.scale.linear()
+  			    	.domain(domain)
+  			    	.range(range);
+  			});
+*/
+			
+			// create data points
+			svg.selectAll("circle")
+			    .data(data.values)
+			    .enter().append("circle")
+			    .attr("class", function(d) { 
+			    	return d.shows; 
+			    })
+			    .attr("cx", function(d) { 
+			    	return d.time * 100; 
+			    })
+			    .attr("cy", function(d) { 
+			    	return h - d.sentiment * 10; 
+			    })
+			    .attr("r", function(d) { 
+			    	return d.count; 
+			    });
+			
+			// assign random color to each show
+/*
+			$.each(data.shows,function(key, value) {
+				$getClass = $("." + value);
+				randomColor = '#' + (0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1,6);
+				$getClass.css({
+					"fill":randomColor
+				});
+			});
+*/
+			
+		});
+		
+		$(document).ready(function() {
+			$("#shows a").on("mouseenter",function(self) {
+				self = $(this);
+				var show = "." + self.attr("class");
+				$("#chart").find(show).animate({"opacity":.8}, 100);
+			}).on("mouseleave", function() {
+				self = $(this);
+				var show = "." + self.attr("class");
+				$("#chart").find(show).animate({"opacity":.3}, 100);
+			});
+		});
+		
+	</script>     
+        
+	<div id="chart">
+	</div>
+	
+	<div id="shows">
+		<a href="#" class="thesimpsons">the simpsons</a>
+		<a href="#" class="familyguy">family guy</a>
+		<a href="#" class="bobsburger">bob's burger</a>
+	</div>    
+        
+        
+</body>
+
+</html>  
