@@ -3,9 +3,8 @@
 
 <head>
 	<title>D3 Test</title>
-	<script type="text/javascript" src="../../d3.v2.js"></script>
-	<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="../../lib/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../_js/d3.v2.js"></script>
+	<script type="text/javascript" src="../_js/jquery-1.8.1.min.js"></script>
 	<style>
 		.axis path,
 		.axis line {
@@ -39,7 +38,7 @@
 		var yScale = d3.scale.linear().domain([0, d3.max(dataset1, function(d) { return d[1]; })]).range([h - padding, padding]).nice();
 		var rScale = d3.scale.linear().domain([0, d3.max(dataset1, function(d) { return d[1]; })]).range([1, 20]).nice();
 		var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-        var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5);
+        var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(10);
 
         // points
 		svg.selectAll("circle")
@@ -94,12 +93,6 @@
         	.attr("font-size", "10px")
         	.attr("fill", "red");
         
-        // x-axis
-        svg.append("g")
-        	.attr("class", "axis")
-        	.attr("transform", "translate(0," + (h - padding) + ")")
-        	.call(xAxis);
-
         // y-axis
         svg.append("g")
         	.attr("class", "axis")

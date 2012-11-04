@@ -1,6 +1,5 @@
 {
-	"properties":["count","sentiment","time"],
-	"shows":["thesimpsons","familyguy"],
+	"shows":["thesimpsons","familyguy,bobsburger"],
 	"values":[
 		{"count":10,"sentiment":6.5,"time":1,"show":"thesimpsons"},
 		{"count":53,"sentiment":7.2,"time":2,"show":"thesimpsons"},

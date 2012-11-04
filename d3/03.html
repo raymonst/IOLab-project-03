@@ -9,23 +9,28 @@
 		.axis path,
 		.axis line {
 		    fill: none;
-		    stroke: black;
+		    stroke: #ccc;
 		    shape-rendering: crispEdges;
 		}
 		.axis text {
-			font-size: 10px;
+			color: #000;
+			fill: 10px;
 		}
-		svg circle {
-			opacity: .3;
+		#chart text {
+			display:none;
 		}
-		svg circle:hover {
-			opacity: .5;
+		#chart circle {
+			cursor: pointer;
+			opacity: .2;
 		}
-		svg .familyguy {
-			fill: #ff0000;
+		#chart .familyguy {
+			fill: #0f86c8;
 		}
-		svg .thesimpsons {
-			fill: blue;
+		#chart .thesimpsons {
+			fill: #fcdc00;
+		}
+		#chart .bobsburger {
+			fill: #ff1e2e;
 		}
 	</style>
 </head>
@@ -37,20 +42,17 @@
 		d3.json("data.json", function(data) {
 
 			// initial variables
-			var w = 500;
+			var w = 1000;
 			var h = 500;
 			var svg = d3.select("#chart").append("svg").attr("width",w).attr("height",h);
 			var padding = 30;
 
-			var xScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[0]; })]).range([padding, w - padding*2]).nice();
+			var xScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[0]; })]).range([padding, w]).nice();
 			var yScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([h - padding, padding]).nice();
 			var rScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([1, 20]).nice();
-			var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+			var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5);
 			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5);
-			
-			
-			
-			
+						
 /*
 			var x = {}, y = {};
   			data.shows.forEach(function(show) {
@@ -68,17 +70,64 @@
 			    .data(data.values)
 			    .enter().append("circle")
 			    .attr("class", function(d) { 
-			    	return d.shows; 
+			    	return d.show; 
+			    })
+			    .attr("id", function(d) { 
+			    	return (d.show + d.time); 
 			    })
 			    .attr("cx", function(d) { 
 			    	return d.time * 100; 
 			    })
 			    .attr("cy", function(d) { 
-			    	return h - d.sentiment * 10; 
+			    	return h - d.sentiment * 50; 
 			    })
 			    .attr("r", function(d) { 
 			    	return d.count; 
+			    })
+			    .on("mouseover",function(self) {
+					self = $(this);
+					var dataLabel = "." + self.attr("id");
+					self.animate({"opacity":1}, 100);
+					self.parent().find(dataLabel).css({"display":"block"});
+				}).on("mouseout", function() {
+				    self = $(this);
+					var dataLabel = "." + self.attr("id");
+				    self.animate({"opacity":.2}, 100);
+					self.parent().find(dataLabel).hide();
+				});
+		
+			// x-axis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(0," + (h- padding) + ")")
+				.call(xAxis);
+/* 			    	.call(d3.svg.axis().scale(xScale).orient("bottom")); */
+			    
+			// y-axis
+			svg.append("g")
+			    .attr("class", "axis")
+			    .attr("transform", "translate(" + padding + ",0)")
+			    .call(yAxis);
+			    
+			// labels
+			svg.selectAll("text")
+			    .data(data.values)
+			    .enter()
+			    .append("text")
+			    .text(function(d) {
+			    	return d.count;
+			    })
+			    .attr("class", function(d) {
+			    	return (d.show + d.time); 
+			    })
+			    .attr("x", function(d) {
+			    	return d.time * 100;
+			    })
+			    .attr("y", function(d) {
+			    	return h - d.sentiment * 50 - 10;
 			    });
+
+
 			
 			// assign random color to each show
 /*
@@ -97,12 +146,14 @@
 			$("#shows a").on("mouseenter",function(self) {
 				self = $(this);
 				var show = "." + self.attr("class");
-				$("#chart").find(show).animate({"opacity":.8}, 100);
-			}).on("mouseleave", function() {
+				$("#chart").find(show).animate({"opacity":1}, 100);
+			}).on("mouseleave", function(self) {
 				self = $(this);
 				var show = "." + self.attr("class");
-				$("#chart").find(show).animate({"opacity":.3}, 100);
+				$("#chart").find(show).animate({"opacity":.2}, 100);
+			}).on("click", function(self) {
 			});
+
 		});
 		
 	</script>     
@@ -112,7 +163,9 @@
 	
 	<div id="shows">
 		<a href="#" class="thesimpsons">the simpsons</a>
+		<br/>
 		<a href="#" class="familyguy">family guy</a>
+		<br/>
 		<a href="#" class="bobsburger">bob's burger</a>
 	</div>    
         
