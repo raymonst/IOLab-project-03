@@ -1,9 +1,45 @@
-var data = {
+<!DOCTYPE html>
+<html>
 
-    //----------------------------------------------------------------------------------------------------------
-    init : function() {
-    
-		d3.json("_js/data.json", function(data) {
+<head>
+	<title>D3 Test</title>
+	<script type="text/javascript" src="../_js/d3.v2.js"></script>
+	<script type="text/javascript" src="../_js/jquery-1.8.1.min.js"></script>
+	<style>
+		.axis path,
+		.axis line {
+		    fill: none;
+		    stroke: #ccc;
+		    shape-rendering: crispEdges;
+		}
+		.axis text {
+			color: #000;
+			fill: 10px;
+		}
+		#chart text {
+			display:none;
+		}
+		#chart circle {
+			cursor: pointer;
+			opacity: .2;
+		}
+		#chart .familyguy {
+			fill: #0f86c8;
+		}
+		#chart .thesimpsons {
+			fill: #fcdc00;
+		}
+		#chart .bobsburger {
+			fill: #ff1e2e;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+	
+		d3.json("data.json", function(data) {
 
 			// initial variables
 			var w = 1000;
@@ -12,13 +48,23 @@ var data = {
 			var padding = 30;
 
 			var xScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[0]; })]).range([padding, w]).nice();
-			var yScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d.values.sentiment; })]).range([h - padding, padding]).nice();
+			var yScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([h - padding, padding]).nice();
 			var rScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d[1]; })]).range([1, 20]).nice();
 			var xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(5);
 			var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5);
-								
-/* 			console.log(yScale); */
-									
+						
+/*
+			var x = {}, y = {};
+  			data.shows.forEach(function(show) {
+  				var value = function(d) { return d[show]; };
+  			    var	domain = [0, d3.max(data.values, value)];
+  			    var	range = [padding / 2, 100 - padding / 2];
+  			    x[show] = d3.scale.linear()
+  			    	.domain(domain)
+  			    	.range(range);
+  			});
+*/
+			
 			// create data points
 			svg.selectAll("circle")
 			    .data(data.values)
@@ -53,8 +99,9 @@ var data = {
 			// x-axis
 			svg.append("g")
 				.attr("class", "axis")
-				.attr("transform", "translate(0," + (h - padding) + ")")
+				.attr("transform", "translate(0," + (h- padding) + ")")
 				.call(xAxis);
+/* 			    	.call(d3.svg.axis().scale(xScale).orient("bottom")); */
 			    
 			// y-axis
 			svg.append("g")
@@ -68,7 +115,7 @@ var data = {
 			    .enter()
 			    .append("text")
 			    .text(function(d) {
-			    	return d.count + " tweets, " + d.sentiment + " average sentiment";
+			    	return d.count;
 			    })
 			    .attr("class", function(d) {
 			    	return (d.show + d.time); 
@@ -95,64 +142,34 @@ var data = {
 			
 		});
 		
-		data.interaction();
-		
-    },
+		$(document).ready(function() {
+			$("#shows a").on("mouseenter",function(self) {
+				self = $(this);
+				var show = "." + self.attr("class");
+				$("#chart").find(show).animate({"opacity":1}, 100);
+			}).on("mouseleave", function(self) {
+				self = $(this);
+				var show = "." + self.attr("class");
+				$("#chart").find(show).animate({"opacity":.2}, 100);
+			}).on("click", function(self) {
+			});
 
-    //----------------------------------------------------------------------------------------------------------
-    interaction : function() {
-		
-		$("#shows a").on("mouseenter",function(self) {
-		    self = $(this);
-		    var show = "." + self.attr("id");
-		    if (!(self.hasClass("off"))) {
-			    $("#chart").find(show).animate({"opacity":1}, 100);		    
-		    }
-		}).on("mouseleave", function(self) {
-		    self = $(this);
-		    var show = "." + self.attr("id");
-		    if (!(self.hasClass("off"))) {
-			    $("#chart").find(show).animate({"opacity":.2}, 100);		    
-		    }
-		}).on("click", function(self) {
-		    self = $(this);
-		    if (self.hasClass("off")) {
-			    self.removeClass("off");
-			    var dataSet = "." + self.attr("id");
-			    $("#chart").find(dataSet).fadeIn(100);
-			    return false;
-		    } else {
-			    self.addClass("off");
-			    var dataSet = "." + self.attr("id");
-			    $("#chart").find(dataSet).fadeOut(100);
-			    return false;
-		    }
 		});
-
-	}
-
-}
-
-//--------------------------------------------------------------------------------------------------------------
-$(document).ready(function() {
-
-    tweet.init();
-
-    var test = {"data": [{"text": 'I love titanic.'},
-                         {"text": 'I hate titantic'}]};
-
-    $.post('http://www.sentiment140.com/api/bulkClassifyJson?appid=derek@ischool.berkeley.com', test, function(data){
+		
+	</script>     
         
-        if(!data)
-        {
-            console.log(data);
-       }
-        else
-        {
-            console.log("meh");
-        }
-    });
+	<div id="chart">
+	</div>
+	
+	<div id="shows">
+		<a href="#" class="thesimpsons">the simpsons</a>
+		<br/>
+		<a href="#" class="familyguy">family guy</a>
+		<br/>
+		<a href="#" class="bobsburger">bob's burger</a>
+	</div>    
+        
+        
+</body>
 
-    data.init();
-
-});
+</html>  

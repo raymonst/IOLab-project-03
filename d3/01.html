@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>D3 Test</title>
+	<script type="text/javascript" src="../../d3.v2.js"></script>
+	<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../lib/jquery-ui/jquery-ui.min.js"></script>
+	<style>
+		rect:hover{opacity:.5;}
+	</style>
+</head>
+
+<body>
+
+	<script type="text/javascript">
+	
+		var dataset = [52,10,40,25,14,26,23,40,15,30,50];
+		var w = 500;
+		var h = 200;
+		var barPadding = 5;
+		var svg = d3.select("body").append("svg").attr("width",w).attr("height",h);
+
+/*
+	    d3.select("body").selectAll("div")
+	        .data(dataset)
+	        .enter()
+	        .append("div")
+	        .attr("class","bar")
+	        .style("height", function(d) {
+		        var barHeight = d * 5;  //Scale up by factor of 5
+		        return barHeight + "px";
+		    });
+*/
+
+/*
+		var circles = svg.selectAll("circle")
+		    .data(dataset)
+		    .enter()
+		    .append("circle");
+
+		circles.attr("cx", function(d, i) {
+			return (i * 75) + 25;
+		})
+		.attr("cy", h/2)
+		.attr("r", function(d) {
+			return d;
+		}).attr("r", function(d) {
+			return d;
+		}).attr("fill", "yellow")
+		.attr("stroke", "orange")
+		.attr("stroke-width", function(d) {
+		    return d/2;
+		});
+*/
+
+
+		svg.selectAll("rect")
+			.data(dataset)
+			.enter()
+			.append("rect")
+			.attr("x", function(d, i) {
+				return i * (w / dataset.length);
+			})
+			.attr("y", function(d) {
+				return h - d*3; 
+    		})
+			.attr("width", w / dataset.length - barPadding)
+			.attr("height", function(d) {
+				return d*3;
+    		})
+    		.attr("fill", function(d) {
+	    		return "rgb(0, 0, " + (d * 10) + ")";
+    		});
+
+    	svg.selectAll("text")
+    		.data(dataset)
+    		.enter()
+    		.append("text")
+    		.text(function(d) {
+	    		return d;
+	    	})
+	    	.attr("x", function(d, i) {
+	    	     return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+	    	})
+	    	.attr("y", function(d) {
+	    	     return h - (d * 3) + 20;
+	    	})
+	    	.attr("text-anchor", "middle")
+	    	.attr("fill", "white");
+		
+		var rect = svg.selectAll("rect")
+		    .data(dataset)
+		    .enter()
+		    .append("rect");
+
+/*
+		rect.attr("cx", function(d, i) {
+			return (i * 75) + 25;
+		})
+		.attr("cy", h/2);
+*/
+		
+   		
+	</script>
+	
+<!--
+	<svg width="500" height="50">
+		<circle cx="25" cy="25" r="22" class="pumpkin" />
+		<ellipse cx="250" cy="25" rx="100" ry="25"/>
+		<line x1="0" y1="0" x2="500" y2="50" stroke="black"/>
+		<circle cx="125" cy="25" r="20" fill="rgba(128, 0, 128, 1.0)"/>
+		<circle cx="150" cy="25" r="20" fill="rgba(0, 0, 255, 0.75)"/>
+		<circle cx="175" cy="25" r="20" fill="rgba(0, 255, 0, 0.5)"/>
+		<circle cx="200" cy="25" r="20" fill="rgba(255, 255, 0, 0.25)"/>
+		<circle cx="225" cy="25" r="20" fill="rgba(255, 0, 0, 0.1)"/>
+	</svg>        
+-->
+      
+        
+</body>
+
+</html>  
