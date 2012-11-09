@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 
 $CSVstring= $_POST['tweetsString']; 
 
-$my_file = 'Tweets1.txt';  //Note: The file permissions for the text file must be 777 i.e. rwxrwxrwx
+$my_file = 'Tweets2.txt';  //Note: The file permissions for the text file must be 777 i.e. rwxrwxrwx
 
 
 
