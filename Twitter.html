@@ -18,6 +18,7 @@ $(document).ready(function(){
 				for (var p = 1; p <=15 ; p++)  //loop to retrieve all 15 pages each with 100 tweets
 				{ 
 						var CSVstring="";
+CSVstring+=HashTags[HTag]+",";
 						//rpp=no. of tweets returned per page. Max is 100
 						//page= the page no. retrieved. Max is 1500 tweets. That is,  rpp * page = 100 * 15 = 1500 tweets
 						//result_type = "recent" instead of "mixed" (which is recent AND popular)
@@ -31,7 +32,7 @@ $(document).ready(function(){
 								for (i in tweets.results)
 								{
 										//tweets.results[i].profile_image_url   //IMAGE OF USER, IN CASE REQD
-CSVstring+=HashTags[HTag];
+
 										CSVstring += tweets.results[i].from_user + ",";
 										//CSVstring += tweets.results[i].from_user_id + ",";
 										//CSVstring += tweets.results[i].from_user_name + ",";
