@@ -1,5 +1,6 @@
 <?PHP
 
+/*
 $file_handle = fopen("Tweets.csv", "r");
 
 
@@ -27,15 +28,23 @@ $index++;
 
 fclose($file_handle);
 
-
+*/
 /*
 $file_write = fopen("sentiments.txt", "w+");
 fwrite($file_write, $all_tweets);
 fclose($file_write);
 */
 
-$data_string = "{\"data\": [";
+//$data = "RT @dannisiminerio: I SHIP NICK AND JESS SO MUCH THAT IT HURTS #newgirl @sydneeyxx";
+$data ="\"It's your birthday and you won't eat cake. You're better than that.\" - Jess #NewGirl";
 
+$data = str_replace("\"", "'", $data);
+//echo "<br>";
+//echo "$data  <br>";
+$data_string = "{\"data\": [{\"text\": \"{$data}\"}]}";
+
+//echo "$data_string <br>";
+/*
 for ($x =0; $x < 10; $x++)
 {
 	$data_string .= "{\"text\": \"{$all_tweets[$x]}\"}"; 
@@ -47,10 +56,11 @@ for ($x =0; $x < 10; $x++)
 
 }
 $data_string .= "]}";
-
+*/
 //echo $data_string;
                                                              
- 
+var_dump(json_decode($data_string)); 
+
 $ch = curl_init('http://www.sentiment140.com/api/bulkClassifyJson?appid=derek@ischool.berkeley.com');                                                                      
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
@@ -62,10 +72,14 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
  
 $result = curl_exec($ch);
 
-$sentiment = preg_match("/\"polarity\":([0-4],/", $result, $matches);
+//$sentiment = preg_match("/\"polarity\":([0-4],/", $result, $matches);
+echo "<br>";
+var_dump( $result );
+echo "<br>";
+var_dump(json_decode($result));
 
-//var_dump( $result );
-print_r($matches[1]);
+
+//print_r($matches[1]);
 
 /*
 $test = "sydneyvanasse,266321054107058180,RT @nbc30rock: .@ABFalecbaldwin Congrats on over one million followers!  High-fiving a million angels… LITERALLY. #30Rock,Wed, 07 Nov 2012 23:27:41 +0000";

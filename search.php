@@ -23,7 +23,7 @@ function searchResults( $search = null ) {
 			//print($n+($i-1)*100);
 			$tweet_data[$n + ($i - 1)*100][0] = $search;
 			$tweet_data[$n + ($i -1)*100][1] = $return["results"][$n]["id"];
-			$tweet_data[$n + ($i -1)*100][2] = $return["results"][$n]["text"];
+			$tweet_data[$n + ($i -1)*100][2] = utf8_encode($return["results"][$n]["text"]);
 			$tweet_data[$n + ($i -1)*100][3] = $return["results"][$n]["created_at"];
 		}	
 	}
