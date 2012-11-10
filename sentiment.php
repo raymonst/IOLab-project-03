@@ -181,13 +181,17 @@ function binData ($data){
 	}
 
 var_dump($binned);
-	return $binned;
+	$result = array("shows"=> "", "values"=> $binned, "random_tweets"=>"");
+
+	return $result;
 
 }
 
 function convert2Json ($agg_data)
 {
-	
+
+
+	file_put_contents("test.json", json_encode($agg_data)) ;
 }
 /*
 $test[] = array("date"=>"Sat, 10 Nov 2012 07:33:42 +0000", "text"=>"RT @tori_clark: â€œ@SoWillSays: Reigning cats & dogsâ€ #newgirl", "query"=> "#NewGirl" , "id"=>"267168138620194816");
@@ -209,7 +213,7 @@ $test[] = array("#NewGirl", "11", "I love turtles", "Wed, 14 Nov 2012 07:33:42 +
 
 
 //binData(assignSentiment($test));
-binData(assignSentiment(searchResults("#NewGirl")));
+convert2Json(binData(assignSentiment(searchResults("#NewGirl"))));
 //var_dump(searchResults("#NewGirl"));
 
 ?>
