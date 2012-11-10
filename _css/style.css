@@ -9,7 +9,7 @@ table{border-collapse:collapse;}
 
 /* global */
 
-body 												{background:#fff;}
+body 												{background:url(../_images/bg.png) 0 0 repeat;}
 a:link,
 a:visited										    {color:#555; text-decoration:none;}
 a:hover,
@@ -40,22 +40,40 @@ textarea											{}
 
 /* container */
 
-#container											{}
-#content											{}
+#container											{background:#fff; margin:0 auto; width:1020px;}
+#content											{margin:0 auto 100px; overflow:auto; padding:0 0 40px 0; width:960px;}
 
+
+
+/* header */
+
+#header												{height:100px; margin:0 0 40px 0;}
+#header img											{display:block; margin:0 auto; width:500px;}
 
 
 /* chart */
 
 .axis path,
-.axis line 											{fill:none; stroke:#ccc; shape-rendering:crispEdges;}
+.axis line 											{fill:none; stroke:#ccc; stroke-dasharray:1,4; shape-rendering:crispEdges;}
+.axis text 											{fill:#ccc; display:block !important; font-size:9px !imporant;}
+.axis g:first-child									{display:none !important;}
 
-#chart												{height:500px; width:1000px;}
+#line-graph 										{stroke:#ccc; stroke-width:1; stroke-dasharray:1,4; fill:none;}
+ 
+#chart												{height:540px; margin:0 auto 40px; width:840px;}
+#chart svg											{padding:20px;}
 #chart text 										{color:#000; display:none; font-size:12px;}
-#chart circle 										{cursor:pointer; opacity:.2;}
+#chart circle 										{cursor:pointer; opacity:.1;}
 #chart .familyguy 									{fill:#0f86c8;}
 #chart .thesimpsons 								{fill:#fcdc00;}
 #chart .bobsburger 									{fill:#ff1e2e;}
+
+
+
+#shows												{border-top:1px solid #ccc; padding:20px 0 0 0;}
+/* #shows-tweets										{} */
+#shows-list li										{float:left; margin:0 15px 0 0; width:80px;}
+#shows-list li a									{background:#ccc; display:block; width:80px;}
 
 
 

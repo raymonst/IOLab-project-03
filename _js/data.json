@@ -1,36 +1,32 @@
 {
-	"shows":["thesimpsons","familyguy,bobsburger"],
+	"shows":["thesimpsons","familyguy","bobsburger"],
 	"values":[
-		{"count":10,"sentiment":6.5,"time":1,"show":"thesimpsons"},
-		{"count":53,"sentiment":7.2,"time":2,"show":"thesimpsons"},
-		{"count":105,"sentiment":7.5,"time":3,"show":"thesimpsons"},
-		{"count":86,"sentiment":2.3,"time":4,"show":"thesimpsons"},
+		{"count":10,"sentiment":7.5,"time":1,"show":"thesimpsons"},
+		{"count":70,"sentiment":7.2,"time":2,"show":"thesimpsons"},
+		{"count":100,"sentiment":7.5,"time":3,"show":"thesimpsons"},
+		{"count":50,"sentiment":6.3,"time":4,"show":"thesimpsons"},
 		{"count":56,"sentiment":7.4,"time":5,"show":"thesimpsons"},
 		{"count":32,"sentiment":5.3,"time":6,"show":"thesimpsons"},
 		{"count":71,"sentiment":6.3,"time":7,"show":"thesimpsons"},
-		{"count":65,"sentiment":3.9,"time":8,"show":"thesimpsons"},
-		{"count":22,"sentiment":4.5,"time":9,"show":"thesimpsons"},
-		{"count":19,"sentiment":6.2,"time":10,"show":"thesimpsons"},
 		{"count":76,"sentiment":4.4,"time":1,"show":"familyguy"},
 		{"count":43,"sentiment":6.2,"time":2,"show":"familyguy"},
 		{"count":29,"sentiment":3.9,"time":3,"show":"familyguy"},
 		{"count":17,"sentiment":5.6,"time":4,"show":"familyguy"},
 		{"count":20,"sentiment":4.5,"time":5,"show":"familyguy"},
 		{"count":34,"sentiment":3.9,"time":6,"show":"familyguy"},
-		{"count":57,"sentiment":5.1,"time":7,"show":"familyguy"},
-		{"count":41,"sentiment":6.0,"time":8,"show":"familyguy"},
-		{"count":39,"sentiment":5.5,"time":9,"show":"familyguy"},
-		{"count":23,"sentiment":5.9,"time":10,"show":"familyguy"},
+		{"count":57,"sentiment":4.9,"time":7,"show":"familyguy"},
 		{"count":9,"sentiment":5.1,"time":1,"show":"bobsburger"},
 		{"count":13,"sentiment":7.2,"time":2,"show":"bobsburger"},
 		{"count":7,"sentiment":6.7,"time":3,"show":"bobsburger"},
 		{"count":25,"sentiment":8.2,"time":4,"show":"bobsburger"},
 		{"count":15,"sentiment":7.4,"time":5,"show":"bobsburger"},
 		{"count":8,"sentiment":4.2,"time":6,"show":"bobsburger"},
-		{"count":28,"sentiment":5.4,"time":7,"show":"bobsburger"},
-		{"count":19,"sentiment":7.6,"time":8,"show":"bobsburger"},
-		{"count":10,"sentiment":8.9,"time":9,"show":"bobsburger"},
-		{"count":21,"sentiment":2.2,"time":10,"show":"bobsburger"}
+		{"count":28,"sentiment":5.4,"time":7,"show":"bobsburger"}
+	],
+	"random_tweets": [
+		{"thesimpsons":["Quisque sit amet est et sapien ullamcorper pharetra","In vel sem","Quisque sit amet est et sapien ullamcorper pharetra"]},
+		{"familyguy":["Sed sollicitudin velit eu magna","Duis dignissim euismod quam","Nam ante nulla, interdum vel, tristique ac"]},
+		{"bobsburger":["Mauris sapien velit, pulvinar non","Cras dictum","Curabitur sed leo"]}
 	]
 
 }

@@ -3,38 +3,37 @@ var data = {
     //----------------------------------------------------------------------------------------------------------
     init : function() {
     
-		d3.json("_js/data.json", function(data) {
+		d3.json("_js/data-2.json", function(data) {
 
 
 			// initial variables
 			this.w = 800;
 			this.h = 500;
 			this.svg = d3.select("#chart").append("svg").attr("width",w).attr("height",h);
-			this.padding = 1;
+			this.padding = 10;
 
 			this.xScale = d3.scale.linear().domain([0, w]).range([0, w]).nice();
-			this.yScale = d3.scale.linear().domain([0, h]).range([h, 0]).nice();
-			this.rScale = d3.scale.linear().domain([0, d3.max(data.values, function(d) { return d.count; })]).range([3, 125]).nice();
-
-			this.xScaleAxis = d3.scale.linear().domain([0, 8]).range([0, w]).nice();
-			this.yScaleAxis = d3.scale.linear().domain([0, 10]).range([h, 0]).nice();
-			this.xAxis = d3.svg.axis().scale(xScaleAxis).orient("bottom").ticks(8);
-			this.yAxis = d3.svg.axis().scale(yScaleAxis).orient("left").ticks(8);
-
-
+			this.yScale = d3.scale.linear().domain([0, w]).range([h, 0]).nice();
+			this.rScale = d3.scale.linear().domain([0, d3.max(data, function(d) { return d.count; })]).range([3, 125]).nice();
+			this.xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(8);
+			this.yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(8);
 																	
 			// create data points
-
 /*
-			var line = d3.svg.line()
-			    .x(function(d) { 
-			    	return d.time * 100; 
-			    })
-			    .y(function(d) { 
-			    	return h - d.sentiment * 50; 
-			    })
-			svg.append("svg:path").attr("d",line(data.values)).attr("id","line-graph"); 
+				var line = d3.svg.line()
+				    .x(function(d) { 
+				    	return d.time * 100; 
+				    })
+				    .y(function(d) { 
+				    	return h - d.sentiment * 50; 
+				    })
+				svg.append("svg:path").attr("d",line(data.values)).attr("id","line-graph"); 
 */
+
+
+			$.each(data, function(k, v) { 
+				console.log(v);
+			});
 
 
 			svg.selectAll("circle")
@@ -101,7 +100,6 @@ var data = {
 			    	return h - d.sentiment * 50 - 10;
 			    });
 
-			
 			// x-axis
 			svg.append("g")
 				.attr("class", "axis")
@@ -116,7 +114,7 @@ var data = {
 			    
 
 
-
+			
 			// assign random color to each show
 /*
 			$.each(data.shows,function(key, value) {
@@ -139,7 +137,7 @@ var data = {
 
 		$("#shows a").on("mouseenter",function(self) {
 		    self = $(this);
-		    var show = "." + self.parent().attr("id");
+		    var show = "." + self.attr("id");
 		    if (!(self.hasClass("off"))) {
 			    $("#chart").find(show).animate({"opacity":1}, 100);		    
 		    }
@@ -157,11 +155,11 @@ var data = {
 		    self = $(this);
 		    if (self.hasClass("off")) {
 			    self.removeClass("off");
-			    var dataSet = "." + self.parent().attr("id");
+			    var dataSet = "." + self.attr("id");
 			    $("#chart").find(dataSet).fadeIn(100);
 		    } else {
 			    self.addClass("off");
-			    var dataSet = "." + self.parent().attr("id");
+			    var dataSet = "." + self.attr("id");
 			    $("#chart").find(dataSet).fadeOut(100);
 		    }
 			return false;
@@ -175,5 +173,21 @@ var data = {
 $(document).ready(function() {
 
     data.init();
+
+    var test = {"data": [{"text": 'I love titanic.'},
+                         {"text": 'I hate titantic'}]};
+
+    $.post('http://www.sentiment140.com/api/bulkClassifyJson?appid=derek@ischool.berkeley.com', test, function(data){
+        
+        if(!data)
+        {
+            console.log(data);
+       }
+        else
+        {
+            console.log("meh");
+        }
+    });
+
 
 });
