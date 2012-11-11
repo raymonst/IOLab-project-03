@@ -1,5 +1,51 @@
 <?PHP
 
+
+$test = "dddd ///// \"\\\\";
+echo $test;
+echo "<br><br>";
+
+$data = str_replace("\\", "/" , $test);
+echo $test;
+echo "<br><br>";
+
+preg_replace('\$', '/', $test);
+echo $test;
+echo "<br><br>";
+
+//$today = getdate();
+//$today = mktime();
+//var_dump($today);
+//echo "<br><br>";
+
+/*
+$today = strftime("%F");
+var_dump($today);
+
+
+for($n = 0; $n < 10; $n++)
+{
+	echo "<br><br>";
+	$date = strftime("%F", strtotime("-{$n} day", strtotime($today)));
+
+	var_dump($date);
+	echo "<br><br>";
+}
+
+$test = array();
+$tweets = 1;
+
+if(empty($tweets))
+{
+	echo "the array is empty";
+}
+else
+{	
+	echo "the array is something, who knew";
+}
+
+
+
 /*
 $file_handle = fopen("Tweets.csv", "r");
 
@@ -36,14 +82,19 @@ fclose($file_write);
 */
 
 //$data = "RT @dannisiminerio: I SHIP NICK AND JESS SO MUCH THAT IT HURTS #newgirl @sydneeyxx";
-$data ="\"It's your birthday and you won't eat cake. You're better than that.\" - Jess #NewGirl";
+//$data ="\"It's your birthday and you won't eat cake. You're better than that.\" - Jess #NewGirl";
+//$data = "We (@eltiofanegas @mariasimavilla @david_boyero) are talking about you @ZooeyDeschanel and #newgirl";  
 
-$data = str_replace("\"", "'", $data);
-//echo "<br>";
-//echo "$data  <br>";
+//$data = "#bored :\ decided to have a #newgirl marathon :/";
+$data = "We (@eltiofanegas @mariasimavilla @david_boyero) are talking about you @ZooeyDeschanel and #newgirl";
+
+//$data = str_replace("\"", "'", $data);
+//$data = str_replace("\\", "/" , $tweet_data[$x][2]);
+echo "<br>";
+echo "$data  <br>";
 $data_string = "{\"data\": [{\"text\": \"{$data}\"}]}";
 
-//echo "$data_string <br>";
+echo "$data_string <br>";
 /*
 for ($x =0; $x < 10; $x++)
 {
@@ -58,7 +109,7 @@ for ($x =0; $x < 10; $x++)
 $data_string .= "]}";
 */
 //echo $data_string;
-                                                             
+                                                            
 var_dump(json_decode($data_string)); 
 
 $ch = curl_init('http://www.sentiment140.com/api/bulkClassifyJson?appid=derek@ischool.berkeley.com');                                                                      

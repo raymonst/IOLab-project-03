@@ -4,34 +4,53 @@
     and tweet date "created_at"
 
 */
-function searchResults( $search = null ) {
+function searchResults( $search = null, $date) {
 
+	if(empty($date))
+	{
+		echo "<br> date was not passed <br>";
+		$date = strftime("%F");
+	}
+
+	$offset = 0;
 	$tweet_data = array();
 
 	for($i = 1; $i <= 15; $i++)
 	{
-		$url = "http://search.twitter.com/search.json?q=" . urlencode( $search ) . "&lang=en&rpp=100" . $i . "&result_type=recent";
+		$url = "http://search.twitter.com/search.json?q=" . urlencode( $search ) . "&lang=en&rpp=100&page=" . $i . "&result_type=mixed&until=" . $date;
 		$curl = curl_init();
 		curl_setopt( $curl, CURLOPT_URL, $url );
 		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, 1 );
 		$result = curl_exec( $curl );
 		curl_close( $curl );
 		$return = json_decode( $result, true );
+/*
+		echo "<br><br>";
+		var_dump($return);
+		echo "<br><br>";
+*/
+		if(empty($return["results"]))
+		{
+			break;
+		}
 
 		for($n = 0; $n < count($return["results"]); $n++)
 		{
 			//print($n+($i-1)*100);
-			$tweet_data[$n + ($i - 1)*100][0] = $search;
-			$tweet_data[$n + ($i -1)*100][1] = $return["results"][$n]["id"];
-			$tweet_data[$n + ($i -1)*100][2] = utf8_encode($return["results"][$n]["text"]);
-			$tweet_data[$n + ($i -1)*100][3] = $return["results"][$n]["created_at"];
+			$tweet_data[$n + $offset/*($i - 1)*100*/][0] = $search;
+			$tweet_data[$n + $offset][1] = $return["results"][$n]["id"];
+			$tweet_data[$n + $offset][2] = utf8_encode($return["results"][$n]["text"]) ;
+			$tweet_data[$n + $offset][3] = $return["results"][$n]["created_at"];
 		}	
+		$offset += count($return["results"]);
 	}
 
 	return $tweet_data;
 }
 
-//print_r(searchResults("#NewGirl"));
+
+//$result = searchResults("#NewGirl", "2012-11-04");
+//var_dump($result);
 /*
 $hash = array("#NewGirl", "#ModernFamily");
 
