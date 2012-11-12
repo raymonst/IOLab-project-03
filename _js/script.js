@@ -14,7 +14,7 @@ var data = {
 
 			this.xScale = d3.scale.linear().domain([0, w]).range([0, w]).nice();
 			this.yScale = d3.scale.linear().domain([0, h]).range([h, 0]).nice();
-			this.rScale = d3.scale.linear().domain([0, d3.max(data.values, function(d) { return d.count; })]).range([3, 125]).nice();
+			this.rScale = d3.scale.linear().domain([0, d3.max(data.values, function(d) { return d.count; })]).range([3, 120]).nice();
 
 			this.xScaleAxis = d3.scale.linear().domain([0, 8]).range([0, w]).nice();
 			this.yScaleAxis = d3.scale.linear().domain([0, 10]).range([h, 0]).nice();
@@ -28,7 +28,7 @@ var data = {
 /*
 			var line = d3.svg.line()
 			    .x(function(d) { 
-			    	return d.time * 100; 
+			    	return d.day * 100; 
 			    })
 			    .y(function(d) { 
 			    	return h - d.sentiment * 50; 
@@ -41,16 +41,16 @@ var data = {
 			    .data(data.values)
 			    .enter().append("circle")
 			    .attr("class", function(d) { 
-			    	return d.show; 
+			    	return d.show.replace("#",""); 
 			    })
 			    .attr("id", function(d) { 
-			    	return (d.show + d.time); 
+			    	return (d.show.replace("#","") + d.day); 
 			    })
 			    .attr("cx", function(d) { 
-			    	return d.time * 100; 
+			    	return d.day * 100; 
 			    })
 			    .attr("cy", function(d) { 
-			    	return h - d.sentiment * 50; 
+			    	return h - (d.sentiment * 10/4) * 50; 
 			    })
 			    .attr("r", function(d) { 
 			    	return rScale(d.count); 
@@ -92,10 +92,10 @@ var data = {
 			    	return d.count + " tweets, " + d.sentiment + " average sentiment";
 			    })
 			    .attr("class", function(d) {
-			    	return (d.show + d.time); 
+			    	return (d.show.replace("#","") + d.day); 
 			    })
 			    .attr("x", function(d) {
-			    	return d.time * 100;
+			    	return d.day * 100;
 			    })
 			    .attr("y", function(d) {
 			    	return h - d.sentiment * 50 - 10;
