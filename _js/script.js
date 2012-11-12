@@ -3,7 +3,7 @@ var data = {
     //----------------------------------------------------------------------------------------------------------
     init : function() {
     
-		d3.json("_js/data.json", function(data) {
+		d3.json("allShows.json", function(data) {
 
 
 			// initial variables
@@ -19,7 +19,7 @@ var data = {
 			this.xScaleAxis = d3.scale.linear().domain([0, 8]).range([0, w]).nice();
 			this.yScaleAxis = d3.scale.linear().domain([0, 10]).range([h, 0]).nice();
 			this.xAxis = d3.svg.axis().scale(xScaleAxis).orient("bottom").ticks(8);
-			this.yAxis = d3.svg.axis().scale(yScaleAxis).orient("left").ticks(8);
+			this.yAxis = d3.svg.axis().scale(yScaleAxis).orient("left").ticks(10);
 
 
 																	
@@ -50,7 +50,7 @@ var data = {
 			    	return d.day * 100; 
 			    })
 			    .attr("cy", function(d) { 
-			    	return h - (d.sentiment * 10/4) * 50; 
+			    	return h - ((d.sentiment * 2.5) * 50); 
 			    })
 			    .attr("r", function(d) { 
 			    	return rScale(d.count); 
@@ -89,7 +89,7 @@ var data = {
 			    .enter()
 			    .append("text")
 			    .text(function(d) {
-			    	return d.count + " tweets, " + d.sentiment + " average sentiment";
+			    	return d.show + "," + d.count + " tweets, " + (d.sentiment * 2.5);
 			    })
 			    .attr("class", function(d) {
 			    	return (d.show.replace("#","") + d.day); 
@@ -164,6 +164,19 @@ var data = {
 			    var dataSet = "." + self.parent().attr("id");
 			    $("#chart").find(dataSet).fadeOut(100);
 		    }
+			return false;
+		});
+
+		$("#toggle-all").on("click", function(self){
+			self = $(this);
+			if (self.hasClass("off")) {
+				$("#chart circle").fadeIn(100);
+				self.text("hide all").removeClass("off");
+			} else {
+				alert("X");
+				$("#chart circle").fadeOut(100);
+				self.text("show all").addClass("off");
+			}
 			return false;
 		});
 

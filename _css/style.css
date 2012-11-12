@@ -63,10 +63,20 @@ textarea											{}
 #chart												{height:540px; margin:0 auto 40px; width:840px;}
 #chart svg											{padding:20px;}
 #chart text 										{color:#000; display:none; font-size:12px;}
-#chart circle 										{cursor:pointer; opacity:.1;}
+#chart circle 										{cursor:pointer; display:none; opacity:.1;}
+
+#chart .SouthPark 									{fill:#fc0;}
 #chart .familyguy 									{fill:#0f86c8;}
-#chart .thesimpsons 								{fill:#fcdc00;}
-#chart .bobsburger 									{fill:#ff1e2e;}
+#chart .MythBusters									{fill:#b18546;}
+#chart .TheVoice									{fill:#960202;}
+#chart .DWTS										{fill:#a161c1;}
+#chart .CriminalMinds								{fill:#222;}
+#chart .bones										{fill:#bb8e39;}
+#chart .TheWalkingDead								{fill:#787f56;}
+#chart .HIMYM										{fill:#475578;}
+#chart .NewGirl										{fill:#3f70b5;}
+#chart .ModernFamily								{fill:#f04615;}
+#chart .30Rock										{fill:#FFC760;}
 
 
 
