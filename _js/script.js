@@ -185,11 +185,27 @@ var data = {
 		$("#toggle-all").on("click", function(self) {
 			self = $(this);
 			if (self.hasClass("off")) {
-				$("#chart circle").css({"opacity":.1}).fadeIn(500);
+/* 				$("#chart circle").css({"opacity":.1}).fadeIn(500); */
+			    setTimeout(function() {
+			        $("#chart circle").each(function(i) {
+			            var self = $(this); 
+			            setTimeout(function() { 
+			            	self.css({"opacity":.1}).fadeIn(25);
+			            }, 25 * i);
+			        });
+			    }, 25);   	
 				self.text("hide all").removeClass("off");
 				$("#shows a").removeClass("off");
 			} else {
-				$("#chart circle").fadeOut(100);
+/* 				$("#chart circle").fadeOut(100); */
+			    setTimeout(function() {
+			        $("#chart circle").each(function(i) {
+			            var self = $(this); 
+			            setTimeout(function() { 
+			            	self.fadeOut(25);
+			            }, 25 * i);
+			        });
+			    }, 25);   	
 				self.text("show all").addClass("off");
 				$("#shows a").addClass("off");
 			}

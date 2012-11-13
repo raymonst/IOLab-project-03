@@ -33,8 +33,8 @@ input[type=text]:focus								{}
 input[type=submit]									{}
 textarea											{}
 
-::selection 										{background:#55b0f6; /* Safari */}
-::-moz-selection 									{background:#55b0f6; /* Firefox */}
+::selection 										{background:#231d14; /* Safari */}
+::-moz-selection 									{background:#231d14; /* Firefox */}
 
 
 
@@ -54,7 +54,8 @@ textarea											{}
 
 /* chart */
 
-.axis path 											{fill:none; stroke:#ccc; stroke-width:2; shape-rendering:crispEdges;}
+.axis path 											{fill:none; stroke:#ccc; shape-rendering:crispEdges; stroke-width:2;}
+.axis line 											{fill:none; stroke:#ccc; shape-rendering:crispEdges; stroke-dasharray:0,0 !important; stroke-width:2;}
 .axis text 											{fill:#aaa; display:block !important; font-size:9px !imporant;}
 .axis g:first-child									{display:none !important;}
 
@@ -65,7 +66,7 @@ textarea											{}
 #chart text 										{color:#000; display:none; font-size:.75em;}
 #chart text.stats 									{font-size:1em; text-anchor:end;}
 #chart circle 										{cursor:pointer; display:none; opacity:1;}
-#chart line 										{stroke:#ccc; stroke-width:1; stroke-dasharray:1,4; fill:none;}
+#chart line 										{stroke:#ccc; stroke-dasharray:1,4; stroke-width:1; fill:none;}
 
 #chart .c-SouthPark 								{fill:#fc0;}
 #chart .c-familyguy 								{fill:#0f86c8;}
