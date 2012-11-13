@@ -2,55 +2,46 @@ var data = {
 
     //----------------------------------------------------------------------------------------------------------
     init : function() {
-    
-		d3.json("allShows.json", function(data) {
+		data.plot();
+		data.interaction();
+    },
 
+    plot : function() {
+
+		d3.json("allShows.json", function(data) {
 
 			// initial variables
 			this.w = 800;
-			this.h = 500;
+			this.h = 400;
 			this.svg = d3.select("#chart").append("svg").attr("width",w).attr("height",h);
 			this.padding = 1;
 
 			this.xScale = d3.scale.linear().domain([0, w]).range([0, w]).nice();
 			this.yScale = d3.scale.linear().domain([0, h]).range([h, 0]).nice();
-			this.rScale = d3.scale.linear().domain([0, d3.max(data.values, function(d) { return d.count; })]).range([3, 120]).nice();
+			this.rScale = d3.scale.linear().domain([0, d3.max(data.values, function(d) { return d.count; })]).range([5, 150]).nice();
 
 			this.xScaleAxis = d3.scale.linear().domain([0, 8]).range([0, w]).nice();
-			this.yScaleAxis = d3.scale.linear().domain([0, 10]).range([h, 0]).nice();
+			this.yScaleAxis = d3.scale.linear().domain([3, 10]).range([h, 0]).nice();
 			this.xAxis = d3.svg.axis().scale(xScaleAxis).orient("bottom").ticks(8);
-			this.yAxis = d3.svg.axis().scale(yScaleAxis).orient("left").ticks(10);
-
+			this.yAxis = d3.svg.axis().scale(yScaleAxis).orient("left").ticks(7);
+			
 
 																	
 			// create data points
-
-/*
-			var line = d3.svg.line()
-			    .x(function(d) { 
-			    	return d.day * 100; 
-			    })
-			    .y(function(d) { 
-			    	return h - d.sentiment * 50; 
-			    })
-			svg.append("svg:path").attr("d",line(data.values)).attr("id","line-graph"); 
-*/
-
-
 			svg.selectAll("circle")
 			    .data(data.values)
 			    .enter().append("circle")
 			    .attr("class", function(d) { 
-			    	return d.show.replace("#",""); 
+			    	return ("c-" + d.show.replace("#","")); 
 			    })
 			    .attr("id", function(d) { 
-			    	return (d.show.replace("#","") + d.day); 
+			    	return ("c-" + (d.show.replace("#","")) + d.day); 
 			    })
 			    .attr("cx", function(d) { 
 			    	return d.day * 100; 
 			    })
 			    .attr("cy", function(d) { 
-			    	return h - ((d.sentiment * 2.5) * 50); 
+					return h - (((d.sentiment * 2.5) - 3) * h/7);
 			    })
 			    .attr("r", function(d) { 
 			    	return rScale(d.count); 
@@ -60,13 +51,16 @@ var data = {
 					self = $(this);
 					var radius = self.attr("r");
 					var dataLabel = "." + self.attr("id");
-					self.animate({"opacity":1}, 100);
-					self.parent().find(dataLabel).css({"display":"block"});
+					self.animate({"opacity": 1}, 100);
 					d3.select(this).transition()
-						.attr("r", function() { return radius*1.05 })
+						.attr("r", function() { return radius * 1.05 })
 						.delay(0)
 						.duration(500)
 						.ease("elastic", 1, 2);
+					var statsInfo = self.parent().find(dataLabel).text();
+					var getClass = "." + d3.select(this).attr("class");
+					var getColor = $(getClass).css("fill");
+					$("#tweets-info").css({"color":getColor}).show().html(statsInfo);
 				})
 				.on("mouseout", function() {
 				    self = $(this);
@@ -79,43 +73,54 @@ var data = {
 						.delay(0)
 						.duration(500)
 						.ease("elastic", 1, 2);
+					$("#tweets-info").hide();
 				})
 
 
 
-			// labels
+			// tweets info
 			svg.selectAll("text")
 			    .data(data.values)
 			    .enter()
 			    .append("text")
 			    .text(function(d) {
-			    	return d.show + "," + d.count + " tweets, " + (d.sentiment * 2.5);
+			    	return ("<h3>" + d.show + "</h3>" + d.count + " tweets<br/>" + Math.round(d.sentiment * 2.5 * 100) / 100 + " average sentiment");
 			    })
 			    .attr("class", function(d) {
-			    	return (d.show.replace("#","") + d.day); 
+				    var newClass = "c-" + d.show.replace("#","") + d.day + " stats";
+			    	return newClass; 
 			    })
 			    .attr("x", function(d) {
-			    	return d.day * 100;
+			    	return 800;
 			    })
 			    .attr("y", function(d) {
-			    	return h - d.sentiment * 50 - 10;
+			    	return 50;
 			    });
+
 
 			
 			// x-axis
 			svg.append("g")
 				.attr("class", "axis")
+				.attr("id", "x-axis")
 				.attr("transform", "translate(0," + (h - padding) + ")")
 				.call(xAxis);
 			    
 			// y-axis
 			svg.append("g")
 			    .attr("class", "axis")
+				.attr("id", "y-axis")
 			    .attr("transform", "translate(" + padding + ",0)")
 			    .call(yAxis);
 			    
-
-
+			// horizontal grids
+			for (var j = 0; j < w - (h/7); j = j + (h/7)) {
+			    svg.append("svg:line")
+			    	.attr("x1", 0)
+			    	.attr("y1", j)
+			    	.attr("x2", w)
+			    	.attr("y2", j);
+			};
 
 			// assign random color to each show
 /*
@@ -129,24 +134,19 @@ var data = {
 */
 			
 		});
-		
-		data.interaction();
-		
+				
     },
 
     //----------------------------------------------------------------------------------------------------------
     interaction : function() {
 
+	    // highlight data points when user hovers over the show name, and show/hide when user clicks the show name
 		$("#shows a").on("mouseenter",function(self) {
 		    self = $(this);
 		    var show = "." + self.parent().attr("id");
 		    if (!(self.hasClass("off"))) {
 			    $("#chart").find(show).animate({"opacity":1}, 100);		    
 		    }
-/*
-       .attr("width", function(d) { return d * 20; } )
-       .attr("fill", newColor);
-*/
 		}).on("mouseleave", function(self) {
 		    self = $(this);
 		    var show = "." + self.attr("id");
@@ -158,24 +158,40 @@ var data = {
 		    if (self.hasClass("off")) {
 			    self.removeClass("off");
 			    var dataSet = "." + self.parent().attr("id");
-			    $("#chart").find(dataSet).fadeIn(100);
+			    setTimeout(function() {
+			        $("#chart").find(dataSet).each(function(i) {
+			            var self = $(this); 
+			            setTimeout(function() { 
+			            	self.fadeIn(150);
+			            }, 150 * i);
+			        });
+			    }, 150);   	
 		    } else {
 			    self.addClass("off");
 			    var dataSet = "." + self.parent().attr("id");
-			    $("#chart").find(dataSet).fadeOut(100);
+			    setTimeout(function() {
+			        $("#chart").find(dataSet).each(function(i) {
+			            var self = $(this); 
+			            setTimeout(function() { 
+			            	self.fadeOut(150);
+			            }, 150 * i);
+			        });
+			    }, 150);   	
 		    }
 			return false;
 		});
 
-		$("#toggle-all").on("click", function(self){
+	    // show/hide all data points
+		$("#toggle-all").on("click", function(self) {
 			self = $(this);
 			if (self.hasClass("off")) {
-				$("#chart circle").fadeIn(100);
+				$("#chart circle").css({"opacity":.1}).fadeIn(500);
 				self.text("hide all").removeClass("off");
+				$("#shows a").removeClass("off");
 			} else {
-				alert("X");
 				$("#chart circle").fadeOut(100);
 				self.text("show all").addClass("off");
+				$("#shows a").addClass("off");
 			}
 			return false;
 		});

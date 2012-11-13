@@ -5,6 +5,7 @@
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" media="screen" href="_css/style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="_js/jquery-1.8.1.min.js"></script>
 	<script type="text/javascript" src="_js/d3.v2.js"></script>
 	<script type="text/javascript" src="_js/script.js"></script>
@@ -22,24 +23,41 @@
 	
 		<div id="chart">
 		</div>
-		
+
+		<div id="tweets-info">
+			<h3>Asdf</h3>
+			asdfasdf<br/>asdfasdf
+		</div>		
+
 		<div id="shows">
-			<ul id="shows-list">
-				<li id="SouthPark"><a href="#">South Park</a></li>
-				<li id="familyguy"><a href="#">Family Guy</a></li>
-				<li id="MythBusters"><a href="#">Mythbusters</a></li>
-				<li id="TheVoice"><a href="#">The Voice</a></li>
-				<li id="DWTS"><a href="#">Dancing with the Stars</a></li>
-				<li id="CriminalMinds"><a href="#">Criminal Minds</a></li>
-				<li id="bones"><a href="#">Bones</a></li>
-				<li id="TheWalkingDead"><a href="#">The Walking Dead</a></li>
-				<li id="HIMYM"><a href="#">How I Met Your Mother</a></li>
-				<li id="NewGirl"><a href="#">New Girl</a></li>
-				<li id="ModernFamily"><a href="#">Modern Family</a></li>
-				<li id="30Rock"><a href="#">30 Rock</a></li>
-			</ul>
-			<a href="#" id="toggle-all">show all</a>
+			<div id="shows-list">			
+				<ul>
+					<li><h2>Animations</h2></li>
+					<li id="c-familyguy"><a href="#" class="off">Family Guy</a></li>
+					<li id="c-SouthPark"><a href="#" class="off">South Park</a></li>
+				</ul>
+				<ul>
+					<li><h2>Comedy</h2></li>
+					<li id="c-30Rock"><a href="#" class="off">30 Rock</a></li>
+					<li id="c-HIMYM"><a href="#" class="off">How I Met Your Mother</a></li>
+					<li id="c-ModernFamily"><a href="#" class="off">Modern Family</a></li>
+					<li id="c-NewGirl"><a href="#" class="off">New Girl</a></li>
+				</ul>
+				<ul>
+					<li><h2>Drama</h2></li>
+					<li id="c-bones"><a href="#" class="off">Bones</a></li>
+					<li id="c-CriminalMinds"><a href="#" class="off">Criminal Minds</a></li>
+					<li id="c-TheWalkingDead"><a href="#" class="off">The Walking Dead</a></li>
+				</ul>
+				<ul class="last">
+					<li><h2>Reality Shows</h2></li>
+					<li id="c-DWTS"><a href="#" class="off">Dancing with the Stars</a></li>
+					<li id="c-MythBusters"><a href="#" class="off">Mythbusters</a></li>
+					<li id="c-TheVoice"><a href="#" class="off">The Voice</a></li>
+				</ul>
+			</div>
 		</div>    
+			<a href="#" id="toggle-all" class="off">show all</a>
 
 	</div>
 

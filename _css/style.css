@@ -9,7 +9,7 @@ table{border-collapse:collapse;}
 
 /* global */
 
-body 												{background:url(../_images/bg.png) 0 0 repeat;}
+body 												{background:url(../_images/bg.png) 0 0 repeat; font-family:'Gudea',helvetica,arial,sans-serif;}
 a:link,
 a:visited										    {color:#555; text-decoration:none;}
 a:hover,
@@ -19,7 +19,7 @@ table td										    {}
 
 h1												    {}
 h2												    {}
-h3												    {}
+h3												    {font-size:1.5em; margin:0 0 5px 0;}
 h4												    {}
 h5												    {}
 h6												    {}
@@ -40,50 +40,62 @@ textarea											{}
 
 /* container */
 
-#container											{background:#fff; margin:0 auto; width:1020px;}
-#content											{margin:0 auto 100px; overflow:auto; padding:0 0 60px 0; width:960px;}
+#container											{background:#fff; margin:0 auto; position:relative; width:1020px;}
+#content											{margin:0 auto 100px; overflow:auto; padding:0 0 60px 0; width:940px;}
 
 
 
 /* header */
 
-#header												{height:100px; margin:0 0 40px 0;}
+#header												{height:100px; margin:0;}
 #header img											{display:block; margin:0 auto; width:500px;}
+
 
 
 /* chart */
 
-.axis path,
-.axis line 											{fill:none; stroke:#aaa; stroke-dasharray:1,4; shape-rendering:crispEdges;}
+.axis path 											{fill:none; stroke:#ccc; stroke-width:2; shape-rendering:crispEdges;}
 .axis text 											{fill:#aaa; display:block !important; font-size:9px !imporant;}
 .axis g:first-child									{display:none !important;}
 
-#line-graph 										{stroke:#ccc; stroke-width:1; stroke-dasharray:1,4; fill:none;}
+#y-axis	path										{stroke:none;}
  
-#chart												{height:540px; margin:0 auto 40px; width:840px;}
+#chart												{margin:0 auto 40px; width:840px;}
 #chart svg											{padding:20px;}
-#chart text 										{color:#000; display:none; font-size:12px;}
-#chart circle 										{cursor:pointer; display:none; opacity:.1;}
+#chart text 										{color:#000; display:none; font-size:.75em;}
+#chart text.stats 									{font-size:1em; text-anchor:end;}
+#chart circle 										{cursor:pointer; display:none; opacity:1;}
+#chart line 										{stroke:#ccc; stroke-width:1; stroke-dasharray:1,4; fill:none;}
 
-#chart .SouthPark 									{fill:#fc0;}
-#chart .familyguy 									{fill:#0f86c8;}
-#chart .MythBusters									{fill:#b18546;}
-#chart .TheVoice									{fill:#960202;}
-#chart .DWTS										{fill:#a161c1;}
-#chart .CriminalMinds								{fill:#222;}
-#chart .bones										{fill:#bb8e39;}
-#chart .TheWalkingDead								{fill:#787f56;}
-#chart .HIMYM										{fill:#475578;}
-#chart .NewGirl										{fill:#3f70b5;}
-#chart .ModernFamily								{fill:#f04615;}
-#chart .30Rock										{fill:#FFC760;}
+#chart .c-SouthPark 								{fill:#fc0;}
+#chart .c-familyguy 								{fill:#0f86c8;}
+#chart .c-MythBusters								{fill:#b18546;}
+#chart .c-TheVoice									{fill:#960202;}
+#chart .c-DWTS										{fill:#a161c1;}
+#chart .c-CriminalMinds								{fill:#222;}
+#chart .c-bones										{fill:#bb8e39;}
+#chart .c-TheWalkingDead							{fill:#787f56;}
+#chart .c-HIMYM										{fill:#475578;}
+#chart .c-NewGirl									{fill:#3f70b5;}
+#chart .c-ModernFamily								{fill:#f04615;}
+#chart .c-30Rock									{fill:#ffc760;}
 
 
 
-#shows												{border-top:5px solid #ccc; padding:20px 0 0 0;}
-/* #shows-tweets										{} */
-#shows-list li										{float:left; margin:0 15px 0 0; width:80px;}
-#shows-list li a									{background:#ccc; display:block; width:80px;}
+/* tweet info box */
+
+#tweets-info										{display:block; font-size:.875em; position:absolute; right:120px; text-align:right; top:129px;}
+
+
+
+/* shows */
+
+#shows												{}
+#shows-list ul										{float:left; margin:0 20px 0 0; width:220px;}
+#shows-list ul.last									{margin:0;}
+#shows-list li a									{background:#ccc; display:block; width:220px;}
+
+#toggle-all											{clear:both; display:block; float:none;}
 
 
 
