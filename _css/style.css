@@ -95,8 +95,8 @@ textarea											{}
 #shows-list ul										{float:left; margin:0 20px 0 0; width:220px;}
 #shows-list ul.last									{margin:0;}
 #shows-list li 										{margin:0 0 5px 0;}
-#shows-list li a									{display:block; overflow:auto; padding:5px; width:210px;}
-#shows-list li a:visited,
+#shows-list li a,									
+#shows-list li a:visited							{display:block; overflow:auto; padding:5px; width:210px;}
 #shows-list li a:hover,
 #shows-list li a.on									{color:#fff; text-shadow: 1px 1px 3px #555;}
 #shows-list li a img								{display:block; float:left; margin:0 10px 0 0; width:40px;}
