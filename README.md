@@ -38,8 +38,7 @@ We used a fixed number of TV shows for demonstration purposes. We tried to cover
 * Mythbusters - #MythBusters
 * The Voice - #TheVoice
 
-## Team Members and Roles:
-Derek Kan, Suhani N Mehta, Raymon Sutedjo-The
+## Team Members and Roles
 * [Derek Kan]() - sentiment analysis, main back-end functionalities
 * [Suhani N Mehta]() - data collection from Twitter, additional back-end functionalities
 * [Raymon Sutedjo-The](http://ray-mon.com/) -- interaction & interface design, data visualization
@@ -51,7 +50,7 @@ Derek Kan, Suhani N Mehta, Raymon Sutedjo-The
 ## Demo Version 
 http://ray-mon.com/tweevee/
 
-## Known Bugs:
+## Known Bugs
 * The removal of duplicate entries has not been tested. We are unsure if it functions properly.
 * Most of the tweets are either positive or neutral (no negatives) based on Sentiment140.
 * The Sentiment Analysis is not 100% accurate. For example, if a person tweets a dialogue from the show, the analysis is done of the dialogue instead of the intention of the user who tweeted it.
