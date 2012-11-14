@@ -33,8 +33,8 @@ input[type=text]:focus								{}
 input[type=submit]									{}
 textarea											{}
 
-::selection 										{background:#231d14; /* Safari */}
-::-moz-selection 									{background:#231d14; /* Firefox */}
+::selection 										{background:#231d14; color:#fff; /* Safari */}
+::-moz-selection 									{background:#231d14; color:#fff; /* Firefox */}
 
 
 
