@@ -6,6 +6,9 @@ var data = {
 		data.interaction();
     },
 
+
+
+    //----------------------------------------------------------------------------------------------------------
     plot : function() {
 
 		d3.json("allShows.json", function(data) {
@@ -122,6 +125,15 @@ var data = {
 			    	.attr("y2", j);
 			};
 
+			// change labels on x-axis
+			$("#x-axis g:last text").text("");
+			for (var i = 0; i < 7; i++) { 
+				var eq = i + 1;
+				var selectAxisPoint = "#x-axis g:eq(" + eq + ") text";
+				var label = (data.values[i].time).replace("2012","");
+				$(selectAxisPoint).text(label);
+			}
+
 			// assign random color to each show
 /*
 			$.each(data.shows,function(key, value) {
@@ -137,43 +149,48 @@ var data = {
 				
     },
 
+
+
     //----------------------------------------------------------------------------------------------------------
     interaction : function() {
 
 	    // highlight data points when user hovers over the show name, and show/hide when user clicks the show name
-		$("#shows a").on("mouseenter",function(self) {
+		$("#shows-list a").on("mouseenter",function(self) {
 		    self = $(this);
 		    var show = "." + self.parent().attr("id");
-		    if (!(self.hasClass("off"))) {
+		    if (self.hasClass("on")) {
 			    $("#chart").find(show).animate({"opacity":1}, 100);		    
+			    $("#shows-list a").not(this).animate({"opacity":.1}, 100);		    
 		    }
 		}).on("mouseleave", function(self) {
 		    self = $(this);
 		    var show = "." + self.attr("id");
-		    if (!(self.hasClass("off"))) {
+		    if (self.hasClass("on")) {
 			    $("#chart").find("circle").animate({"opacity":.1}, 100);		    
+			    $("#shows-list a").animate({"opacity":1}, 100);		    
 		    }
 		}).on("click", function(self) {
 		    self = $(this);
-		    if (self.hasClass("off")) {
-			    self.removeClass("off");
-			    var dataSet = "." + self.parent().attr("id");
-			    setTimeout(function() {
-			        $("#chart").find(dataSet).each(function(i) {
-			            var self = $(this); 
-			            setTimeout(function() { 
-			            	self.fadeIn(150);
-			            }, 150 * i);
-			        });
-			    }, 150);   	
-		    } else {
-			    self.addClass("off");
+		    if (self.hasClass("on")) {
+			    self.removeClass("on");
 			    var dataSet = "." + self.parent().attr("id");
 			    setTimeout(function() {
 			        $("#chart").find(dataSet).each(function(i) {
 			            var self = $(this); 
 			            setTimeout(function() { 
 			            	self.fadeOut(150);
+			            }, 150 * i);
+			        });
+			    }, 150);   	
+		        $("#shows-list a").animate({"opacity":1}, 100);		    
+		    } else {
+			    self.addClass("on");
+			    var dataSet = "." + self.parent().attr("id");
+			    setTimeout(function() {
+			        $("#chart").find(dataSet).each(function(i) {
+			            var self = $(this); 
+			            setTimeout(function() { 
+			            	self.fadeIn(150).animate({"opacity":.5},100).animate({"opacity":.1},100);
 			            }, 150 * i);
 			        });
 			    }, 150);   	
@@ -184,20 +201,7 @@ var data = {
 	    // show/hide all data points
 		$("#toggle-all").on("click", function(self) {
 			self = $(this);
-			if (self.hasClass("off")) {
-/* 				$("#chart circle").css({"opacity":.1}).fadeIn(500); */
-			    setTimeout(function() {
-			        $("#chart circle").each(function(i) {
-			            var self = $(this); 
-			            setTimeout(function() { 
-			            	self.css({"opacity":.1}).fadeIn(25);
-			            }, 25 * i);
-			        });
-			    }, 25);   	
-				self.text("hide all").removeClass("off");
-				$("#shows a").removeClass("off");
-			} else {
-/* 				$("#chart circle").fadeOut(100); */
+			if (self.hasClass("on")) {
 			    setTimeout(function() {
 			        $("#chart circle").each(function(i) {
 			            var self = $(this); 
@@ -206,8 +210,19 @@ var data = {
 			            }, 25 * i);
 			        });
 			    }, 25);   	
-				self.text("show all").addClass("off");
-				$("#shows a").addClass("off");
+				self.text("show all").removeClass("on");
+				$("#shows-list a").removeClass("on");
+			} else {
+			    setTimeout(function() {
+			        $("#chart circle").each(function(i) {
+			            var self = $(this); 
+			            setTimeout(function() { 
+			            	self.css({"opacity":.1}).fadeIn(25);
+			            }, 25 * i);
+			        });
+			    }, 25);   	
+				self.text("hide all").addClass("on");
+				$("#shows-list a").addClass("on");
 			}
 			return false;
 		});
@@ -215,6 +230,8 @@ var data = {
 	}
 
 }
+
+
 
 //--------------------------------------------------------------------------------------------------------------
 $(document).ready(function() {
