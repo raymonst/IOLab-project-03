@@ -54,17 +54,17 @@ textarea											{}
 
 /* chart */
 
-.axis path 											{fill:none; stroke:#ccc; shape-rendering:crispEdges; stroke-width:0;}
-.axis line 											{fill:none; stroke:#ccc; shape-rendering:crispEdges; stroke-dasharray:0,0 !important; stroke-width:2;}
-.axis text 											{fill:#aaa; display:block !important; font-size:9px !imporant;}
-.axis g:first-child									{display:none !important;}
+#chart .axis path 									{fill:none; stroke:#ccc; shape-rendering:crispEdges; stroke-width:0;}
+#chart .axis line 									{fill:none; stroke:#ccc; stroke-dasharray:0,0 !important; shape-rendering:crispEdges; stroke-width:1;}
+#chart .axis text 									{display:block !important; fill:#aaa;}
+#chart .axis g:first-child							{display:none !important;}
 
 #y-axis	path										{stroke:none;}
  
-#chart												{margin:0 auto 30px; width:840px;}
-#chart svg											{padding:20px;}
-#chart text 										{color:#000; display:none; font-size:.75em;}
-#chart text.stats 									{font-size:1em; text-anchor:end;}
+#chart												{margin:0 auto 30px; width:880px;}
+#chart svg											{padding:40px; width:800px;}
+#chart text		 									{font-size:.75em;}
+#chart text.stats 									{display:none; text-anchor:end;}
 #chart circle 										{cursor:pointer; display:none; opacity:1;}
 #chart line 										{stroke:#ccc; stroke-dasharray:1,4; stroke-width:1; fill:none;}
 

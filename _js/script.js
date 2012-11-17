@@ -17,7 +17,7 @@ var data = {
 			this.w = 800;
 			this.h = 400;
 			this.svg = d3.select("#chart").append("svg").attr("width",w).attr("height",h);
-			this.padding = 1;
+			this.padding = 20;
 
 			this.xScale = d3.scale.linear().domain([0, w]).range([0, w]).nice();
 			this.yScale = d3.scale.linear().domain([0, h]).range([h, 0]).nice();
@@ -25,7 +25,7 @@ var data = {
 
 			this.xScaleAxis = d3.scale.linear().domain([0, 8]).range([0, w]).nice();
 			this.yScaleAxis = d3.scale.linear().domain([3, 10]).range([h, 0]).nice();
-			this.xAxis = d3.svg.axis().scale(xScaleAxis).orient("bottom").ticks(8);
+			this.xAxis = d3.svg.axis().scale(xScaleAxis).orient("top").ticks(8);
 			this.yAxis = d3.svg.axis().scale(yScaleAxis).orient("left").ticks(7);
 			
 
@@ -106,7 +106,7 @@ var data = {
 			svg.append("g")
 				.attr("class", "axis")
 				.attr("id", "x-axis")
-				.attr("transform", "translate(0," + (h - padding) + ")")
+				.attr("transform", "translate(0," + h + ")")
 				.call(xAxis);
 			    
 			// y-axis
